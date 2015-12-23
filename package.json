@@ -1,6 +1,6 @@
 {
   "name": "hapi-starter",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Hapi scaffold for Cue project",
   "main": "index.js",
   "scripts": {
