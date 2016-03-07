@@ -5,7 +5,7 @@ const Code = require('code');
 const Hapi = require('hapi');
 const GetPlugin = require('../../../server/method/get');
 const IndexPlugin = require('../../../server/api/index');
-const CatboxMemory = require('catbox-memory');
+const CatboxRedis = require('catbox-redis');
 
 const lab = exports.lab = Lab.script();
 let request;
@@ -17,8 +17,8 @@ lab.beforeEach((done) => {
   const plugins = [GetPlugin, IndexPlugin];
   server = new Hapi.Server({
     cache: [{
-      name: 'memoryCache',
-      engine: CatboxMemory
+      name: 'redisCache',
+      engine: CatboxRedis
     }]
   });
   server.connection({
