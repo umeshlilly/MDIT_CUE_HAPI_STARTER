@@ -39,40 +39,60 @@ const manifest = {
     port: Config.get('/port/web'),
     labels: ['web']
   }],
-  plugins: {
-    'good': {
-      opsInterval: 60000,
-      reporters: [{
-        reporter: require('good-console'),
-        events: {
-          log: {
-            $filter: 'env',
-            production: 'error',
-            test: 'error',
-            $default: '*'
-          },
-          response: {
-            $filter: 'env',
-            production: 'error',
-            test: 'error',
-            $default: '*'
-          },
-          request: {
-            $filter: 'env',
-            production: 'error',
-            test: 'error',
-            $default: '*'
-          },
-          ops: '*'
+  registrations: [
+    {
+      plugin: {
+        register: 'good',
+        options: {
+          opsInterval: 60000,
+          reporters: [{
+            reporter: require('good-console'),
+            events: {
+              log: {
+                $filter: 'env',
+                production: 'error',
+                test: 'error',
+                $default: '*'
+              },
+              response: {
+                $filter: 'env',
+                production: 'error',
+                test: 'error',
+                $default: '*'
+              },
+              request: {
+                $filter: 'env',
+                production: 'error',
+                test: 'error',
+                $default: '*'
+              },
+              ops: '*'
+            }
+          }]
         }
-      }]
+      }
     },
-    'lout': {},
-    'inert': {},
-    'vision': {},
-    './server/method/get': {},
-    './server/api/': {}
-  }
+    {
+      plugin: 'lout',
+      options: {}
+    },
+    {
+      plugin: 'inert',
+      options: {}
+    },
+    {
+      plugin: 'vision',
+      options: {}
+    },
+    {
+      plugin: './server/method/get',
+      options: {}
+    },
+    {
+      plugin: './server/api/',
+      options: {}
+    }
+  ]
 };
 
 

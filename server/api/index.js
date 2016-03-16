@@ -78,7 +78,7 @@ exports.register = (server, options, next) => {
 
       // @NOTE: Since we are performing an update we'll also want to drop
       // the item from the cache if it has previously been cached!
-      server.methods['getItem'].cache.drop(request.params.id, (err) => {
+      server.methods.getItem.cache.drop(request.params.id, (err) => {
 
         if (err) {
           return reply(err);
