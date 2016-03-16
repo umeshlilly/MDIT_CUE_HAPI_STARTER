@@ -52,7 +52,7 @@ exports.register = (server, options, next) => {
         // Cache name as defined in manifest, this tells hapi which
         // cache to store the items in; this could be memory (as it is here)
         // or a third-part such as redis.
-        cache: 'memoryCache',
+        cache: 'redisCache',
 
         // Segements isolate the cache data of this method from others.
         // It is like a unique identifier for only this methods data or

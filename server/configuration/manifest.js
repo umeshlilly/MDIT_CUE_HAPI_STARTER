@@ -12,6 +12,10 @@ const criteria = {
   env: process.env.NODE_ENV
 };
 
+
+const redisUrl = require('redis-url')
+  .parse(process.env.REDIS_URL === undefined ? '' : process.env.REDIS_URL);
+
 /**
  * The manifest document is passed directly to the Glue module and is
  * the contract by which the server is built.
@@ -30,8 +34,37 @@ const manifest = {
     },
     cache: [
       {
-        name: 'memoryCache',
-        engine: require('catbox-memory')
+        $filter: 'env',
+        dev: {
+          name: 'redisCache',
+          engine: require('catbox-redis'),
+          host: redisUrl.hostname,
+          port: redisUrl.port,
+          password: redisUrl.password,
+          database: redisUrl.database,
+          partition: process.env.REDIS_PARTITION
+        },
+        stage: {
+          name: 'redisCache',
+          engine: require('catbox-redis'),
+          host: redisUrl.hostname,
+          port: redisUrl.port,
+          password: redisUrl.password,
+          database: redisUrl.database,
+          partition: process.env.REDIS_PARTITION
+        },
+        test: {
+          name: 'redisCache',
+          engine: require('catbox-redis'),
+          database: 'cue-test',
+          partition: 'trials'
+        },
+        $default: {
+          name: 'redisCache',
+          engine: require('catbox-redis'),
+          database: 'cue-local',
+          partition: 'trials'
+        }
       }
     ]
   },
