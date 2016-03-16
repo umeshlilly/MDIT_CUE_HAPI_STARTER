@@ -22,6 +22,8 @@ const config = {
   port: {
     web: {
       $filter: 'env',
+      dev: process.env.PORT,
+      stage: process.env.PORT,
       test: 32001,
       $default: 22001
     }
