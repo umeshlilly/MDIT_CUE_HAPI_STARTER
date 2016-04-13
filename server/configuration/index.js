@@ -19,6 +19,16 @@ const criteria = {
 const config = {
   $meta: 'This document contains application level configuration.',
   projectName: Pkg.name,
+  version: Pkg.version,
+  redis: {
+    $filter: 'env',
+    $default: {
+      url: process.env.REDIS_URL
+    },
+    test: {
+      url: '' // local defaults
+    }
+  },
   port: {
     web: {
       $filter: 'env',

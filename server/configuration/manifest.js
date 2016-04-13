@@ -14,7 +14,7 @@ const criteria = {
 
 
 const redisUrl = require('redis-url')
-  .parse(process.env.REDIS_URL === undefined ? '' : process.env.REDIS_URL);
+  .parse(Config.get('/redis/url'));
 
 /**
  * The manifest document is passed directly to the Glue module and is

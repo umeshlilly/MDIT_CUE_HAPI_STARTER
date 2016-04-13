@@ -21,6 +21,7 @@ lab.experiment('Composer', () => {
     Composer((err, iServer) => {
       server = iServer;
 
+      Code.expect(err).to.not.exist();
       Code.expect(server).to.be.an.object();
       return done(err);
     });
