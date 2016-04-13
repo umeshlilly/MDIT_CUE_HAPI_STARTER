@@ -106,7 +106,12 @@ const manifest = {
       }
     },
     {
-      plugin: 'lout',
+      plugin: {
+        register: 'lout',
+        options: {
+          apiVersion: Config.get('/version')
+        }
+      },
       options: {}
     },
     {
