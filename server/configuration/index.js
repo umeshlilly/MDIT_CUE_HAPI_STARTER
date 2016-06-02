@@ -22,8 +22,17 @@ const config = {
   version: Pkg.version,
   redis: {
     $filter: 'env',
-    $default: {
+    dev: {
       url: process.env.REDIS_URL
+    },
+    stage: {
+      url: process.env.REDIS_URL
+    },
+    prod: {
+      url: process.env.REDIS_URL
+    },
+    $default: {
+      url: ''
     },
     test: {
       url: '' // local defaults
