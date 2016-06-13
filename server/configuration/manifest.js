@@ -32,80 +32,95 @@ const manifest = {
         security: true
       }
     },
-    cache: [
-      {
-        $filter: 'env',
-        dev: {
-          name: 'redisCache',
-          engine: require('catbox-redis'),
-          host: redisUrl.hostname,
-          port: redisUrl.port,
-          password: redisUrl.password,
-          database: redisUrl.database,
-          partition: process.env.REDIS_PARTITION
-        },
-        stage: {
-          name: 'redisCache',
-          engine: require('catbox-redis'),
-          host: redisUrl.hostname,
-          port: redisUrl.port,
-          password: redisUrl.password,
-          database: redisUrl.database,
-          partition: process.env.REDIS_PARTITION
-        },
-        test: {
-          name: 'redisCache',
-          engine: require('catbox-redis'),
-          database: 'cue-test',
-          partition: 'trials'
-        },
-        $default: {
-          name: 'redisCache',
-          engine: require('catbox-redis'),
-          database: 'cue-local',
-          partition: 'trials'
-        }
+    cache: [{
+      $filter: 'env',
+      dev: {
+        name: 'redisCache',
+        engine: require('catbox-redis'),
+        host: redisUrl.hostname,
+        port: redisUrl.port,
+        password: redisUrl.password,
+        database: redisUrl.database,
+        partition: process.env.REDIS_PARTITION
+      },
+      stage: {
+        name: 'redisCache',
+        engine: require('catbox-redis'),
+        host: redisUrl.hostname,
+        port: redisUrl.port,
+        password: redisUrl.password,
+        database: redisUrl.database,
+        partition: process.env.REDIS_PARTITION
+      },
+      test: {
+        name: 'redisCache',
+        engine: require('catbox-redis'),
+        database: 'cue-test',
+        partition: 'trials'
+      },
+      $default: {
+        name: 'redisCache',
+        engine: require('catbox-redis'),
+        database: 'cue-local',
+        partition: 'trials'
       }
-    ]
+    }]
   },
   connections: [{
     port: Config.get('/port/web'),
     labels: ['web']
   }],
-  plugins: {
-    'good': {
-      opsInterval: 60000,
-      reporters: [{
-        reporter: require('good-console'),
-        events: {
-          log: {
-            $filter: 'env',
-            production: 'error',
-            test: 'error',
-            $default: '*'
-          },
-          response: {
-            $filter: 'env',
-            production: 'error',
-            test: 'error',
-            $default: '*'
-          },
-          request: {
-            $filter: 'env',
-            production: 'error',
-            test: 'error',
-            $default: '*'
-          },
-          ops: '*'
-        }
-      }]
-    },
-    'lout': {},
-    'inert': {},
-    'vision': {},
-    './server/method/get': {},
-    './server/api/': {}
-  }
+  registrations: [{
+    plugin: {
+      register: 'good',
+      options: {
+        opsInterval: 60000,
+        reporters: [{
+          reporter: require('good-console'),
+          events: {
+            log: {
+              $filter: 'env',
+              production: 'error',
+              test: 'error',
+              $default: '*'
+            },
+            response: {
+              $filter: 'env',
+              production: 'error',
+              test: 'error',
+              $default: '*'
+            },
+            request: {
+              $filter: 'env',
+              production: 'error',
+              test: 'error',
+              $default: '*'
+            },
+            ops: '*'
+          }
+        }]
+      }
+    }
+  }, {
+    plugin: {
+      register: 'lout',
+      options: {
+        apiVersion: Config.get('/version')
+      }
+    }
+  }, {
+    plugin: 'inert'
+  }, {
+    plugin: 'vision'
+  }, {
+    plugin: {
+      register: './server/method/get'
+    }
+  }, {
+    plugin: {
+      register: './server/api'
+    }
+  }]
 };
 
 
