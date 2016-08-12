@@ -5,6 +5,10 @@
 - [Overview](#overview)
 - [Getting Started](#getting-started)
 - [Testing](#testing)
+	- [Unit Tests](#unit-tests)
+	- [Static Code Analysis](#static-code-analysis)
+	- [Code Coverage](#code-coverage)
+	- [Dependency Vulnerability Detection](#dependency-vulnerability-detection)
 - [IDE Configuration](#ide-configuration)
 - [Service's Environment-Based Configuration](#services-environment-based-configuration)
 
@@ -59,11 +63,27 @@ The shortcut to run the test suite is:
 npm test
 ```
 
-This will not only run `lab`, executing all tests in the `./test` folder, it will also run `eslint` against the project. Along with executing tests and static code analysis, lab will also check the level of code coverage; reporting missed code. Any issues will be reported in your terminal.
+### Unit Tests
+
+The suite will run the unit tests in the `./test` folder using the [lab](https://www.npmjs.com/package/lab) testing utility.
+
+Any new bugs found should first be replicated with a new unit test before being fixed. Approach everything with TDD.
 
 **Note:** You can generate a HTML document report also with `npm run test-cov`.
 
-Each service is expected to have +95% code coverage, and will not be published to production unless all tests are passing. Any new bugs found should first be replicated with a new test before being fixed. Approach everything with TDD.
+### Static Code Analysis
+
+The test will run lab with `eslint` enabled based on the projects `./.eslintrc` configuration. This will produce a report of code errors (missing semi-colons, type coercion, etc).
+
+### Code Coverage
+
+The test will also include a coverage report. Each service is expected to have +95% code coverage.
+
+**Note:** You can generate a HTML document report also with `npm run test-cov`. This report is useful on seeing precisely what has been missed.
+
+### Dependency Vulnerability Detection
+
+After the lab suite has completed the project will execute `nsp`. This will look at the projects dependencies and detect any known vulnerabilities in the dependency versions being used. A report will be rendered should a vulnerability be detected.
 
 ## IDE Configuration
 
