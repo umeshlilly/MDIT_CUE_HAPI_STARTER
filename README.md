@@ -99,6 +99,6 @@ The configuration documents for the service are created using the [confidence](h
 
 Now, based on the `NODE_ENV` we apply different configuration values for the service. For example, in order to connect to Redis the service needs to know a connection string for that instance of Redis. When `NODE_ENV` is `undefined` the configuration will use the `$default` value, which will attempt to connect to a local (`127.0.0.1:6379`) Redis server. However, in a hosted environment where a `NODE_ENV` variable is set and matches one of the options in the document, such as staging (`stage`), it will look for the `REDIS_URL` environment variable.
 
-**Note:** This example, brings up an important point. We are careful to avoid storage of sensitive information in the configuration documents, we use environment variables for this purpose. For exmaple, we do not store things like: database credentials, cache credentials, tokens, keys, certificates, etc.
+**Note:** This example, brings up an important point. We are careful to avoid storage of sensitive information in the configuration documents, we use environment variables for this purpose. For example, we do not store things like: database credentials, cache credentials, tokens, keys, certificates, etc.
 
 This format of configuration allows for clean manipulation of the service's state with little developer involvement.
