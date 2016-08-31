@@ -39,6 +39,8 @@ This project should and will continue to be updated as the project moves along. 
 
 ## Getting Started
 
+To run locally this project requires that [Redis](http://redis.io/download) and [Node.js](https://nodejs.org/en/) be installed.
+
 After cloning the project, `cd` to the root of the project.
 
 Install dependencies:
