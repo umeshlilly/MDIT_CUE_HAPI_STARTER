@@ -5,7 +5,7 @@ This project acts as a baseline scaffold for Cue services based on Node.js & Hap
   - RESTful interface (`./server/api/index.js`)
   - Schema validation (`./server/validation/**/*.js`)
   - Testing w/ 100% code coverage (`./test/**/*.js`)
-  - Automated API documentation
+  - Automated API documentation (`/documentation`)
   - Server-Side Caching (`./server/api/index.js` - see `cache` constant and its use)
 
 This project is made up of a few key packages listed below; it is worth taking time to read their individual READMEs:
