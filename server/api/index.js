@@ -14,14 +14,14 @@ exports.register = (server, options, next) => {
     method: 'GET',
     path: '/hi',
     config:{
-       tags: ['api']
+      tags: ['api']
     },
     handler: (request, reply) => {
 
       // This route is simply returning the status of our cache.
       // However, this route would retrieve paginated items and cache
       // those results from the remote endpoint.
-      return reply("Hello World");
+      return reply('Hello World');
     }
   });
 
@@ -33,7 +33,7 @@ exports.register = (server, options, next) => {
     method: 'GET',
     path: '/',
     config:{
-       tags: ['api']
+      tags: ['api']
     },
     handler: (request, reply) => {
 
@@ -52,7 +52,7 @@ exports.register = (server, options, next) => {
     method: 'POST',
     path: '/',
     config: {
-       tags: ['api'],
+      tags: ['api'],
       validate: {
         payload: Validation.request
       }
@@ -72,7 +72,7 @@ exports.register = (server, options, next) => {
     method: 'GET',
     path: '/{id}',
     config:{
-       tags: ['api']
+      tags: ['api']
     },
     handler: (request, reply) => {
 
@@ -97,7 +97,7 @@ exports.register = (server, options, next) => {
     method: 'PUT',
     path: '/{id}',
     config: {
-       tags: ['api'],
+      tags: ['api'],
       validate: {
         payload: Validation.request
       }
@@ -126,7 +126,7 @@ exports.register = (server, options, next) => {
     method: 'DELETE',
     path: '/{id}',
     config:{
-       tags: ['api']
+      tags: ['api']
     },
     handler: (request, reply) => {
 

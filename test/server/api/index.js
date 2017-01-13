@@ -38,7 +38,36 @@ lab.beforeEach((done) => {
 });
 
 
+
+
+
 lab.experiment('Index Plugin', () => {
+
+
+  lab.experiment('GET /', () => {
+    lab.beforeEach((done) => {
+
+      request = {
+        method: 'GET',
+        url: '/hi'
+      };
+
+      return done();
+    });
+
+
+    lab.test('it returns Hello World message', (done) => {
+
+      return server.inject(request, (response) => {
+        var expect_string = 'Hello World';
+        Code.expect(response.result).to.be.equal(expect_string);
+        Code.expect(response.statusCode).to.equal(200);
+
+        return done();
+      });
+    });
+  });
+
 
   lab.experiment('GET /', () => {
     lab.beforeEach((done) => {
