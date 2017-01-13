@@ -1,8 +1,12 @@
 'use strict';
 
+const Hapi = require('hapi');
 const Confidence = require('confidence');
+const Inert = require('inert');
+const Vision = require('vision');
+const HapiSwagger = require('hapi-swagger');
 const Config = require('./');
-
+const server = new Hapi.Server();
 /**
  * Criteria is passed to the document and can be used to select the correct
  * value from the options. See: https://github.com/hapijs/confidence#filters
@@ -106,14 +110,23 @@ const manifest = {
       }
     },
     {
-      plugin: {
-        register: 'lout',
-        options: {
-          apiVersion: Config.get('/version')
-        }
-      },
-      options: {}
-    },
+   plugin: {
+     register: 'hapi-swagger',
+     options: {
+       info: {
+         'title': 'Hapi-Swagger starter Documentation',
+         'version': Config.get('/version')
+       },
+       securityDefinitions: {
+         'jwt': {
+           'type': 'apiKey',
+           'name': 'Authorization',
+           'in': 'header'
+         }
+       }
+     }
+   }
+ },
     {
       plugin: 'inert',
       options: {}
@@ -132,8 +145,12 @@ const manifest = {
     }
   ]
 };
-
-
+const options = {
+    info: {
+            'title': 'Test API Documentation',
+            'version': '2.1.1',
+        }
+    };
 const store = new Confidence.Store(manifest);
 
 
