@@ -20,18 +20,13 @@
     "glue": "3.2.x",
     "good": "^6.4.0",
     "good-console": "^5.2.0",
-    "hapi": "^15.0.0",
-    "hapi-swagger": "^7.5.0",
-    "inert": "^3.2.1",
+    "hapi": "^11.1.2",
+    "inert": "^3.2.0",
     "joi": "^8.0.1",
     "lodash": "^3.10.1",
     "lout": "^9.0.0",
-    "redis-url": "^1.2.1",
-    "swagger-converter": "^1.4.1",
-    "swagger-editor": "^2.9.2",
-    "swagger-test-templates": "^1.2.0",
-    "swagger-tools": "^0.10.1",
-    "vision": "^4.1.1"
+    "vision": "^4.0.1",
+    "redis-url": "^1.2.1"
   },
   "devDependencies": {
     "code": "^2.0.1",
