@@ -6,12 +6,35 @@ const Validation = {
 
 exports.register = (server, options, next) => {
 
+
+  /**
+   * GET / 
+   */
+  server.route({
+    method: 'GET',
+    path: '/hi',
+    config:{
+       tags: ['api']
+    },
+    handler: (request, reply) => {
+
+      // This route is simply returning the status of our cache.
+      // However, this route would retrieve paginated items and cache
+      // those results from the remote endpoint.
+      return reply("Hello World");
+    }
+  });
+
+
   /**
    * GET /
    */
   server.route({
     method: 'GET',
     path: '/',
+    config:{
+       tags: ['api']
+    },
     handler: (request, reply) => {
 
       // This route is simply returning the status of our cache.
@@ -29,6 +52,7 @@ exports.register = (server, options, next) => {
     method: 'POST',
     path: '/',
     config: {
+       tags: ['api'],
       validate: {
         payload: Validation.request
       }
@@ -47,6 +71,9 @@ exports.register = (server, options, next) => {
   server.route({
     method: 'GET',
     path: '/{id}',
+    config:{
+       tags: ['api']
+    },
     handler: (request, reply) => {
 
       // Get item if in the cache or perform necessary action to retrieve it.
@@ -70,6 +97,7 @@ exports.register = (server, options, next) => {
     method: 'PUT',
     path: '/{id}',
     config: {
+       tags: ['api'],
       validate: {
         payload: Validation.request
       }
@@ -97,6 +125,9 @@ exports.register = (server, options, next) => {
   server.route({
     method: 'DELETE',
     path: '/{id}',
+    config:{
+       tags: ['api']
+    },
     handler: (request, reply) => {
 
       return reply({});

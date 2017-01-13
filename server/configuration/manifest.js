@@ -105,15 +105,24 @@ const manifest = {
         }
       }
     },
-    {
-      plugin: {
-        register: 'lout',
-        options: {
-          apiVersion: Config.get('/version')
-        }
-      },
-      options: {}
-    },
+  {
+   plugin: {
+     register: 'hapi-swagger',
+     options: {
+       info: {
+         'title': 'Trials Service Documentation',
+         'version': Config.get('/version')
+       },
+       securityDefinitions: {
+         'jwt': {
+           'type': 'apiKey',
+           'name': 'Authorization',
+           'in': 'header'
+         }
+       }
+     }
+   }
+ },
     {
       plugin: 'inert',
       options: {}
